@@ -1,1 +1,121 @@
 
+
+#include <iostream>
+using namespace std;
+
+
+
+//nome prodoto,prezzo,categoria,
+
+
+struct  supermercato 
+{
+    string nome_prodoto;
+    string categoria;
+    int prezzo;
+	
+}
+
+
+
+
+
+		int aggiungi(string arr_Prodo[],int D)
+	{
+		
+	}
+	   break;
+
+	
+
+
+	int visualiza(string arr_Prodo[],int D)
+	{
+	
+	}  /////visualiza il prodotto
+	break;
+
+
+
+
+	int cerca(stiring arr_Prodo[],int D,int Prodoto)
+	{
+
+
+		 ////restituisce la posizione
+	}
+
+
+
+int cancella(stiring arr_Prodo[],int D,int Prodoto)
+	{
+
+
+	 ////restituisce la posizione
+	}
+
+bool cancela(true);
+
+
+bool modifica(true);
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+int main()
+{
+	do{
+
+	switch(opzione)
+	
+case 1:
+{
+		int aggiungi(string arr_Prodo[],int D)
+	{	
+	}
+	   break;
+}
+	
+
+case 2:
+{
+	int visualiza(string arr_Prodo[],int D)
+	{
+	
+	}  /////visualiza il prodotto
+	break;
+}
+
+
+case 3:
+{
+	int cerca(stiring arr_Prodo[],int D,int Prodoto)
+	{
+
+
+		 ////restituisce la posizione
+	}
+}
+
+case 4:
+{  int cancella(stiring arr_Prodo[],int D,int Prodoto)
+	{
+
+
+	 ////restituisce la posizione
+	}
+	break;
+}
+	
+	}
+	while(opzione !=0)
+	
+	
+	
+	
+	return 0;
+}
