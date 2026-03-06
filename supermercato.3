@@ -45,18 +45,17 @@ v[d] = x;
 	}
 
 
-	void cerca( prodotto x, prodotto v[], int d)           //cerca
+	int cerca( prodotto x, prodotto v[], int d)           //cerca
 	{
 		for( int i = 0; i < d; i++)
 		{
                 
 			 if(v[i].nome==x.nome)
 			 { 
-			  cout<<"la posizione e"<<i<<endl;
-			    break;
+			  return i;
 			 }
 			 else
-			 cout<<"prodotto non trovato"<<endl;
+			 cout<<"non e presente il prodotto cercato"<<endl;
 		}    
              
 	}
@@ -130,7 +129,8 @@ int main()
 		{  
 		cout<<"inserisci il nome da cercare"<<endl;
 		cin >> x.nome;
-	    cerca(x, supermercato,d);
+	    int posizione=cerca(x, supermercato,d);
+	    cout<<posizione;
 		break;
 		 }
 	case 4: 
@@ -153,6 +153,3 @@ int main()
 
     return 0;
 }
-
-
-
