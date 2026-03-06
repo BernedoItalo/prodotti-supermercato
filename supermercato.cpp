@@ -33,9 +33,9 @@ v[d] = x;
 	{
 					for( int i = 0; i < d; i++)
 		{
-		cout <<" prodotto:" << i<<endl;
+		cout <<"prodotto:" << i<<endl;
 		
-		cout << "nome :" << v[i].nome << endl;
+		cout << "nome:" << v[i].nome << endl;
 		
 		cout << "prezzo:" << v[i].prezzo << endl;
 		
@@ -45,13 +45,23 @@ v[d] = x;
 	}
 
 
-	int cerca( prodotto x, prodotto v[], int d)
-	{	  //                      //                           //
-b	     if(v[i].nome==x.nome&&v[i].categoria==x.categoria&&v[i].prezzo&&x.prezzo
-        {  
-        return i;
-		}
-      
+	void cerca( prodotto x, prodotto v[], int d)           //cerca
+	{
+		for( int i = 0; i < d; d++)
+		{
+                
+			 if(v[i].nome==x.nome)
+			 { 
+			  cout<<"la posizione e"<<i<<endl;
+			    break;
+			 }
+		}    
+             
+	}
+
+/////////////////////////////////////////////////////////////////
+
+bool cancella( prodotto x, prodotto v[], int d)
 {
 return false;
 }
@@ -75,7 +85,7 @@ int main()
 	
 	do{
 //opzioni del menu
-	cout<<endl<< " 1 = aggiungi "<<endl;
+	cout<<endl<< "1 = aggiungi "<<endl;
 
 	cout<< "2 = visualizza "<<endl;
 	
@@ -97,7 +107,8 @@ int main()
 	
 	switch(opzione)
 	{
-	case 1:                             //operazione 1
+	case 1: 
+		{                            //operazione 1
 		cout << "inserisci la categoria"<<endl;
 		getline(cin,x.nome);
 		cin >> x.categoria;
@@ -109,25 +120,29 @@ int main()
 		aggiungi(x, supermercato, d);
 		d++;
 		break;
-
+        }
 	case 2:                           //opzione 2
 		cout << "inserisci il nome del prodoto che ti serve: ";
 		cin >> x.nome;
 		visualizza(supermercato, d);
 		break;
-
-	case 3:                          //opzione 3
-		cerca(x, supermercato);
+	case 3:
+		{  
+		cout<<"inserisci il nome da cercare"<<endl;
+		cin >> x.nome;
+	    cerca(x, supermercato,d);
 		break;
-	
-	case 4:                         //operazione 4
+		 }
+	case 4: 
+		{                          //operazione 4
 		cancella(x, supermercato, d);
-		break;               , d
-
-	case 5:                         //opzione 5
+		break;
+        }
+	case 5: 
+		{                          //opzione 5
 		modifica(x, supermercato, d);
 		break;
-
+           }
 
 	}
 
