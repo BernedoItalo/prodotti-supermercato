@@ -17,10 +17,11 @@ string categoria;
 
 
 
-void aggiungi( prodotto x, prodotto v[], int d)
+void aggiungi( prodotto x, prodotto v[], int &d)
 {
 	
 v[d] = x;
+d++;
 }
 
 
@@ -45,20 +46,18 @@ v[d] = x;
 	}
 
 
-	int cerca( prodotto x, prodotto v[], int d)           //cerca
+int cerca(prodotto x, prodotto v[], int d) {
+    for (int i = 0; i < d; i++)
 	{
-		for( int i = 0; i < d; i++)
-		{
-                
-			 if(v[i].nome==x.nome)
-			 { 
-			  return i;
-			 }
-			 else
-			 cout<<"-1"<<endl;
-		}    
-             
-	}
+    	
+        if (v[i].nome == x.nome) 
+		{ 
+            return i;
+        }
+    }    
+    return -1; 
+}
+
 
 /////////////////////////////////////////////////////////////////
 
@@ -107,18 +106,20 @@ int main()
 	switch(opzione)
 	{
 	case 1: 
-		{                            //operazione 1
-		cout << "inserisci la categoria"<<endl;
-		getline(cin,x.nome);
-		cin >> x.categoria;
-		
-		cout << "scrivi  il prezzo da inserire"<<endl;
-		cin >> x.prezzo;
-		cout << "scrivi  il nome  da inserire"<<endl;
-		cin >> x.nome;
-		aggiungi(x, supermercato, d);
-		d++;
-		break;
+		{       
+    cout << "Inserisci il nome: ";
+    cin.ignore(); // Pulisce l'invio residuo
+    getline(cin, x.nome);
+    cout << "Inserisci la categoria: ";
+    getline(cin, x.categoria);
+    cout << "Inserisci il prezzo: ";
+    cin >> x.prezzo;
+    
+    aggiungi(x, supermercato, d);
+    d++;
+    break;
+
+	
         }
 	case 2:                           //opzione 2
 		cout << "inserisci il nome del prodoto che ti serve: ";
@@ -153,4 +154,3 @@ int main()
 
     return 0;
 }
-
