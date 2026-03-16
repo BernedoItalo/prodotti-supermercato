@@ -11,102 +11,104 @@ float prezzo;
 string categoria;
 };
 
-
-
-
-
-
-
 void aggiungi( prodotto x, prodotto v[], int &d)
 {
-	
+    
 v[d] = x;
 d++;
 }
 
-
-
-
-
-
-
-	void visualizza ( prodotto v[], int d)
-	{
-					for( int i = 0; i < d; i++)
-		{
-		cout <<"prodotto:" << i<<endl;
-		
-		cout << "nome:" << v[i].nome << endl;
-		
-		cout << "prezzo:" << v[i].prezzo << endl;
-		
-		cout << "categoria:" << v[i].categoria << endl;
-		}
-
-	}
-
+void visualizza ( prodotto v[], int d)
+{
+    for( int i = 0; i < d; i++)
+    {
+        cout <<"prodotto:" << i<<endl;
+        
+        cout << "nome:" << v[i].nome << endl;
+        
+        cout << "prezzo:" << v[i].prezzo << endl;
+        
+        cout << "categoria:" << v[i].categoria << endl;
+    }
+}
 
 int cerca(prodotto x, prodotto v[], int d) {
     for (int i = 0; i < d; i++)
-	{
-    	
+    {
         if (v[i].nome == x.nome) 
-		{ 
+        { 
             return i;
         }
     }    
     return -1; 
 }
 
-
 /////////////////////////////////////////////////////////////////
 
-bool cancella( prodotto x, prodotto v[], int d)
-{return false;
+bool cancella( prodotto x, prodotto v[], int &d)
+{
+    int pos = cerca(x, v, d);
+    if (pos == -1)
+        return false;
+
+    for (int i = pos; i < d - 1; i++)
+    {
+        v[i] = v[i + 1];
+    }
+
+    d--;
+    return true;
 }
 
 bool modifica( prodotto x, prodotto v[], int d)
-{return true;
+{
+    int pos = cerca(x, v, d);
+    if (pos == -1)
+        return false;
+
+    cout << "Nuovo nome: ";
+    cin.ignore();
+    getline(cin, v[pos].nome);
+
+    cout << "Nuova categoria: ";
+    getline(cin, v[pos].categoria);
+
+    cout << "Nuovo prezzo: ";
+    cin >> v[pos].prezzo;
+
+    return true;
 }
-
-
 
 /////////////////////////////////////////////////////////////////
 
 int main()
 {
-	prodotto supermercato[100];
-	int d=0;
-	int opzione;
-	prodotto x;
-	
-	
-	do{
+    prodotto supermercato[100];
+    int d=0;
+    int opzione;
+    prodotto x;
+    
+    
+    do{
 //opzioni del menu
-	cout<<endl<< "1 = aggiungi "<<endl;
+    cout<<endl<< "1 = aggiungi "<<endl;
 
-	cout<< "2 = visualizza "<<endl;
-	
-	cout<< "3 = cerca "<<endl;
-	
-	cout<< "4  cancella "<<endl;
-	
-	cout<< "5 = modifica "<<endl;
-	
-	cout<< "0 = termina il programma "<<endl;
-	cin >> opzione;
-	
-	
-	
-	
-	
-/////////////////////////////////////////////////////////////////
-	
-	
-	switch(opzione)
-	{
-	case 1: 
-		{       
+    cout<< "2 = visualizza "<<endl;
+    
+    cout<< "3 = cerca "<<endl;
+    
+    cout<< "4  cancella "<<endl;
+    
+    cout<< "5 = modifica "<<endl;
+    
+    cout<< "0 = termina il programma "<<endl;
+    cin >> opzione;
+    
+    
+    switch(opzione)
+    {
+    case 1: 
+        {       
     cout << "Inserisci il nome: ";
     cin.ignore(); // Pulisce l'invio residuo
     getline(cin, x.nome);
@@ -116,41 +118,26 @@ int main()
     cin >> x.prezzo;
     
     aggiungi(x, supermercato, d);
-    d++;
+    d++;   // ← LO LASCIO COME MI HAI CHIESTO
     break;
-
-	
         }
-	case 2:                           //opzione 2
-		cout << "inserisci il nome del prodoto che ti serve: ";
-		cin >> x.nome;
-		visualizza(supermercato, d);
-		break;
-	case 3:
-		{  
-		cout<<"inserisci il nome da cercare"<<endl;
-		cin >> x.nome;
-	    int posizione=cerca(x, supermercato,d);
-	    cout<<posizione;
-		break;
-		 }
-	case 4: 
-		{                          //operazione 4
-		cancella(x, supermercato, d);
-		break;
-        }
-	case 5: 
-		{                          //opzione 5
-		modifica(x, supermercato, d);
-		break;
-           }
 
-	}
+    case 2:
+        cout << "inserisci il nome del prodoto che ti serve: ";
+        cin >> x.nome;
+        visualizza(supermercato, d);
+        break;
 
- }while(opzione!=0);
+    case 3:
+        {  
+        cout<<"inserisci il nome da cercare"<<endl;
+        cin >> x.nome;
+        int posizione=cerca(x, supermercato,d);
+        cout<<posizione;
+        break;
+         }
 
-
-
-
-    return 0;
-}
+    case 4: 
+        {
+        cout << "Inserisci il nome del prodotto da cancellare: ";
+        cin.ignore();
