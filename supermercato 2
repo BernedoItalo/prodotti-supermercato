@@ -3,56 +3,42 @@
 
 using namespace std;
 
-//prdoto none/prezzo/categoria
-struct prodotto
-{
-string nome;
-float prezzo;
-string categoria;
+// prodotto nome/prezzo/categoria
+struct prodotto {
+    string nome;
+    float prezzo;
+    string categoria;
 };
 
-void aggiungi( prodotto x, prodotto v[], int &d)
-{
-    
-v[d] = x;
-d++;
+void aggiungi(prodotto x, prodotto v[], int &d) {
+    v[d] = x;
+    d++;
 }
 
-void visualizza ( prodotto v[], int d)
-{
-    for( int i = 0; i < d; i++)
-    {
-        cout <<"prodotto:" << i<<endl;
-        
-        cout << "nome:" << v[i].nome << endl;
-        
-        cout << "prezzo:" << v[i].prezzo << endl;
-        
-        cout << "categoria:" << v[i].categoria << endl;
+void visualizza(prodotto v[], int d) {
+    for (int i = 0; i < d; i++) {
+        cout << "Prodotto " << i << endl;
+        cout << "Nome: " << v[i].nome << endl;
+        cout << "Prezzo: " << v[i].prezzo << endl;
+        cout << "Categoria: " << v[i].categoria << endl;
+        cout << endl;
     }
 }
 
 int cerca(prodotto x, prodotto v[], int d) {
-    for (int i = 0; i < d; i++)
-    {
-        if (v[i].nome == x.nome) 
-        { 
+    for (int i = 0; i < d; i++) {
+        if (v[i].nome == x.nome)
             return i;
-        }
-    }    
-    return -1; 
+    }
+    return -1;
 }
 
-/////////////////////////////////////////////////////////////////
-
-bool cancella( prodotto x, prodotto v[], int &d)
-{
+bool cancella(prodotto x, prodotto v[], int &d) {
     int pos = cerca(x, v, d);
     if (pos == -1)
         return false;
 
-    for (int i = pos; i < d - 1; i++)
-    {
+    for (int i = pos; i < d - 1; i++) {
         v[i] = v[i + 1];
     }
 
@@ -60,8 +46,7 @@ bool cancella( prodotto x, prodotto v[], int &d)
     return true;
 }
 
-bool modifica( prodotto x, prodotto v[], int d)
-{
+bool modifica(prodotto x, prodotto v[], int d) {
     int pos = cerca(x, v, d);
     if (pos == -1)
         return false;
@@ -79,69 +64,80 @@ bool modifica( prodotto x, prodotto v[], int d)
     return true;
 }
 
-/////////////////////////////////////////////////////////////////
-
-int main()
-{
+int main() {
     prodotto supermercato[100];
-    int d=0;
+    int d = 0;
     int opzione;
     prodotto x;
-    
-    
-    do{
-//opzioni del menu
-    cout<<endl<< "1 = aggiungi "<<endl;
 
-    cout<< "2 = visualizza "<<endl;
-    
-    cout<< "3 = cerca "<<endl;
-    
-    cout<< "4  cancella "<<endl;
-    
-    cout<< "5 = modifica "<<endl;
-    
-    cout<< "0 = termina il programma "<<endl;
-    cin >> opzione;
-           
-    
-    switch(opzione)
-    {
-    case 1: 
-        {       
-    cout << "Inserisci il nome: ";
-    cin.ignore(); 
-    getline(cin, x.nome);
-    cout << "Inserisci la categoria: ";
-    getline(cin, x.categoria);
-    cout << "Inserisci il prezzo: ";
-    cin >> x.prezzo;
-    
-    aggiungi(x, supermercato, d);
-    d++;   
-    break;
+    do {
+        cout << endl << "1 = aggiungi" << endl;
+        cout << "2 = visualizza" << endl;
+        cout << "3 = cerca" << endl;
+        cout << "4 = cancella" << endl;
+        cout << "5 = modifica" << endl;
+        cout << "0 = termina il programma" << endl;
+
+        cin >> opzione;
+
+        switch (opzione) {
+
+        case 1: {
+            cout << "Inserisci il nome: ";
+            cin.ignore();
+            getline(cin, x.nome);
+
+            cout << "Inserisci la categoria: ";
+            getline(cin, x.categoria);
+
+            cout << "Inserisci il prezzo: ";
+            cin >> x.prezzo;
+
+            aggiungi(x, supermercato, d);
+            break;
         }
 
-    case 2:
-        cout << "inserisci il nome del prodoto che ti serve: ";
-        cin >> x.nome;
-        visualizza(supermercato, d);
-        break;
+        case 2:
+            visualizza(supermercato, d);
+            break;
 
-    case 3:
-        {  
-        cout<<"inserisci il nome da cercare"<<endl;
-        cin >> x.nome;
-        int posizione=cerca(x, supermercato,d);
-        cout<<posizione;
-        break;
-         }
+        case 3: {
+            cout << "Inserisci il nome da cercare: ";
+            cin >> x.nome;
 
-    case 4: 
-        {
-        cout << "Inserisci il nome del prodotto da cancellare: ";
-        cin.ignore();   }
-        
+            int posizione = cerca(x, supermercato, d);
+            cout << "Posizione: " << posizione << endl;
+            break;
         }
-    
-        return 0; }
+
+        case 4: {
+            cout << "Inserisci il nome del prodotto da cancellare: ";
+            cin >> x.nome;
+
+            if (cancella(x, supermercato, d))
+                cout << "Prodotto cancellato." << endl;
+            else
+                cout << "Prodotto non trovato." << endl;
+
+            break;
+        }
+
+        case 5: {
+            cout << "Inserisci il nome del prodotto da modificare: ";
+            cin >> x.nome;
+
+            if (modifica(x, supermercato, d))
+                cout << "Prodotto modificato." << endl;
+            else
+                cout << "Prodotto non trovato." << endl;
+
+            break;
+        }
+
+        }
+
+    } while (opzione != 0);
+
+    return 0;
+}
+
